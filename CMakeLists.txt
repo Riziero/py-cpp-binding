@@ -5,7 +5,7 @@ project(sorting_lib LANGUAGES CXX)
 
 # generate a library from sources
 add_library(sort
-  STATIC
+  SHARED
     src/cppmult.hpp
     src/cppmult.cpp
   )

@@ -1,16 +1,11 @@
-#include "src/Sorting.h"
+#include "src/cppmult.hpp"
 
 #include <cstdlib>
 #include <iostream>
 
 int main() {
-  Message say_hello("Hello, CMake World!");
+  
 
-  std::cout << say_hello << std::endl;
+  std::cout << cppmult(3, 4.5f);
 
-  Message say_goodbye("Goodbye, CMake World");
-
-  std::cout << say_goodbye << std::endl;
-
-  return EXIT_SUCCESS;
 }

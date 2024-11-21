@@ -6,8 +6,8 @@ project(sorting_lib LANGUAGES CXX)
 # generate a library from sources
 add_library(sort
   STATIC
-    ./src/Sorting.h
-    ./src/Sorting.cpp
+    src/cppmult.hpp
+    src/cppmult.cpp
   )
 
 add_executable(run main.cpp)

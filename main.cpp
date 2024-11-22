@@ -11,7 +11,7 @@ int main() {
   sorting(arr, 6);
 
   std::vector<double> input = {3.0, 5.0, 1.0};
-  std::vector<double> out = modify(input);
+  std::vector<double> out = sort_array(input);
 
   for (double i: out)
     std::cout << i << ' ';

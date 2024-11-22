@@ -47,7 +47,7 @@ void sorting(int* array_param, int size_param){
 
 }
 
-std::vector<double> modify(const std::vector<double>& input)
+std::vector<double> sort_array(const std::vector<double>& input)
 {
    std::vector<double> sortedVec = input;
     

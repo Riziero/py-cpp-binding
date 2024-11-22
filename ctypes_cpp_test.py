@@ -29,3 +29,10 @@ if __name__ == "__main__":
     c_lib.cppmult.restype = ctypes.c_float
     answer = c_lib.cppmult(x, ctypes.c_float(y))
     print(f"    In Python: int: {x} float {y:.1f} return val {answer:.1f}")
+
+    # sorting ctypes
+
+    py_values = [1, 2, 3, 4, 2, 7, 1]
+    arr = (ctypes.c_int * len(py_values))(*py_values)
+    c_lib.sorting(arr, 7)
+    print("finish")

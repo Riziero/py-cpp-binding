@@ -4,6 +4,11 @@
 #include "cppmult.hpp"
 
 #include <bits/stdc++.h>
+
+// #include <pybind11/pybind11.h>
+// #include <pybind11/stl.h>
+#include <vector>
+
 using namespace std;
 
 
@@ -38,6 +43,17 @@ void sorting(int* array_param, int size_param){
 	for(int i=0; i<size_param; i++)
 		cout<<int(array_param[i])<<" ";
 
-	std:cout<<std::endl;
+	std::cout<<std::endl;
 
+}
+
+std::vector<double> modify(const std::vector<double>& input)
+{
+   std::vector<double> sortedVec = input;
+    
+    // Sort the vector in ascending order
+    std::sort(sortedVec.begin(), sortedVec.end());
+    
+    // Return the sorted vector
+    return sortedVec;
 }

@@ -4,18 +4,24 @@ cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 project(sorting LANGUAGES CXX)
 # set(CMAKE_VERBOSE_MAKEFILE ON)
 
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+
+
 add_library(sorting
             SHARED
         src/sortArray.cpp
             )
 
 
-find_package(pybind11 REQUIRED)  # or add_subdirectory(pybind11)
+find_package(pybind11 REQUIRED)  # add_subdirectory(pybind11)
 add_library(pysort MODULE src/sortArray.cpp)
 
 
 # Include python headers
 find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
+
 target_include_directories(sorting PRIVATE ${Python3_INCLUDE_DIRS})
 
 # Link against Python libs
@@ -44,4 +50,16 @@ target_include_directories(testcpp PUBLIC ${CMAKE_SOURCE_DIR})
 target_link_libraries(testcpp gtest gtest_main ${PROJECT_NAME})
 add_test(NAME testcpp COMMAND testcpp)
 target_include_directories(testcpp PRIVATE ${Python3_INCLUDE_DIRS})
+
+
+add_custom_target(create_tar ALL 
+    COMMAND     ${CMAKE_COMMAND} 
+    -E tar "cfvz" 
+    "libs.tgz" "${CMAKE_BINARY_DIR}/lib"
+)
+add_dependencies(create_tar sorting)
+
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 

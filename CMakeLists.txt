@@ -1,15 +1,47 @@
 cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 
 # project name and language
-project(sorting_lib LANGUAGES CXX)
+project(sorting LANGUAGES CXX)
+# set(CMAKE_VERBOSE_MAKEFILE ON)
 
-# generate a library from sources
-add_library(sort
-  STATIC
-    ./src/Sorting.h
-    ./src/Sorting.cpp
-  )
+add_library(sorting
+            SHARED
+        src/sortArray.cpp
+            )
 
-add_executable(run main.cpp)
 
-target_link_libraries(run sort)
+find_package(pybind11 REQUIRED)  # or add_subdirectory(pybind11)
+add_library(pysort MODULE src/sortArray.cpp)
+
+
+# Include python headers
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
+target_include_directories(sorting PRIVATE ${Python3_INCLUDE_DIRS})
+
+# Link against Python libs
+find_package(PythonLibs REQUIRED)
+target_link_libraries(sorting ${PYTHON_LIBRARIES})
+
+target_link_libraries(pysort PRIVATE pybind11::module pybind11::lto pybind11::windows_extras)
+
+pybind11_extension(pysort)
+if(NOT MSVC AND NOT ${CMAKE_BUILD_TYPE} MATCHES Debug|RelWithDebInfo)
+    # Strip unnecessary sections of the binary on Linux/macOS
+    pybind11_strip(pysort)
+endif()
+
+set_target_properties(pysort PROPERTIES CXX_VISIBILITY_PRESET "hidden"
+                                         CUDA_VISIBILITY_PRESET "hidden")
+
+
+# hook and configure dependencies
+# set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+add_subdirectory(extern/googletest EXCLUDE_FROM_ALL)
+enable_testing()
+
+add_executable(testcpp src/test.cpp)
+target_include_directories(testcpp PUBLIC ${CMAKE_SOURCE_DIR})
+target_link_libraries(testcpp gtest gtest_main ${PROJECT_NAME})
+add_test(NAME testcpp COMMAND testcpp)
+target_include_directories(testcpp PRIVATE ${Python3_INCLUDE_DIRS})
+

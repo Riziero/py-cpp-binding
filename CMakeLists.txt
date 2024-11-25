@@ -10,9 +10,21 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 
 
 add_library(sorting
-            SHARED
-        src/sortArray.cpp
-            )
+    SHARED
+    src/sortArray.cpp
+)
+
+# Include pybind11 headers folder
+target_include_directories(sorting PRIVATE extern/pybind11/include)
+# Include python headers
+find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
+target_include_directories(sorting PRIVATE ${Python3_INCLUDE_DIRS})
+# Link against Python libs
+find_package(PythonLibs REQUIRED)
+target_link_libraries(sorting ${PYTHON_LIBRARIES})
+
+
+
 
 add_subdirectory(extern/pybind11)
 pybind11_add_module(pysort src/sortArray.cpp)
@@ -20,14 +32,7 @@ pybind11_add_module(pysort src/sortArray.cpp)
 # add_library(pysort MODULE src/sortArray.cpp)
 
 
-# Include python headers
-find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 
-target_include_directories(sorting PRIVATE ${Python3_INCLUDE_DIRS})
-
-# Link against Python libs
-find_package(PythonLibs REQUIRED)
-target_link_libraries(sorting ${PYTHON_LIBRARIES})
 
 # target_link_libraries(pysort PRIVATE pybind11::module pybind11::lto pybind11::windows_extras)
 
@@ -68,8 +73,4 @@ add_custom_command(
     ${CMAKE_BINARY_DIR}/lib/pysort*
     ${pytestingfolder}/pysort.so
 )
-
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 

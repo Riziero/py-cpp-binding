@@ -6,19 +6,19 @@ project(sorting LANGUAGES CXX)
 
 add_library(sorting
             SHARED
-            src/cppmult.cpp
+        src/sortArray.cpp
             )
 
 
 find_package(pybind11 REQUIRED)  # or add_subdirectory(pybind11)
-add_library(example MODULE src/cppmult.cpp)
+add_library(example MODULE src/sortArray.cpp)
 
 
 # Include python headers
 find_package(Python3 REQUIRED COMPONENTS Interpreter Development)
 target_include_directories(sorting PRIVATE ${Python3_INCLUDE_DIRS})
 
-# Link against Python lib
+# Link against Python libs
 find_package(PythonLibs REQUIRED)
 target_link_libraries(sorting ${PYTHON_LIBRARIES})
 

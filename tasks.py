@@ -60,7 +60,7 @@ def build_cmult(c, path=None):
     else:
         print_banner("Building C Library")
         print("Using clang")
-        cmd = "clang -c -Wall -Werror -fpic src/cppmult.cpp"
+        cmd = "clang -c -Wall -Werror -fpic src/sortArray.cpp"
         invoke.run(cmd)
         invoke.run("clang -shared -o libcmult.so cppmult.o")
         print("* Complete")
@@ -134,7 +134,7 @@ def build_cppmult(c):
     print_banner("Building C++ Library")
     print("here with clang")
     invoke.run(
-        "clang++ -O3 -Wall -Werror -shared -std=c++11 -fPIC src/cppmult.cpp "
+        "clang++ -O3 -Wall -Werror -shared -std=c++11 -fPIC src/sortArray.cpp "
         "-o libcppmult.so "
     )
     print("* Complete")

@@ -1,7 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
-#include "cppmult.hpp"
+#include "sortArray.hpp"
 
 #include <bits/stdc++.h>
 

@@ -2,3 +2,4 @@
 /venv
 pytesting/*.so
 pytesting/__pycache__
+pytesting/.py*

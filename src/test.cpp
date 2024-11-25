@@ -1,28 +1,19 @@
-/**
- * tests/test_defaults.cpp
- */
-
 #include "src/cppmult.hpp"
 #include "gtest/gtest.h"
 
 #include <vector>
 
 
-TEST(TestDefaults, BasicAssertions) {
+TEST(TestSortingLib, BasicAssertions) {
 
-    
-    // Vector<double> input = {3., 2. 7.};
-    // Vector<double> out = sort_array(input);
+    // FAIL(); 
+    std::vector<double> input = {3., 2., 7.};
+    std::vector<double> out = sort_array(input);
+    EXPECT_TRUE(out[0] <= out[1]);
 
-    // for (int i = 0; i < out.length(); i++) { 
-        
-    //     if (out[i] > out[i + 1]) {
-    //         FAIL();    
-    //     }
-    // }
-
-    // EXPECT_STREQ(p.name.c_str(), "unknown");
-    // EXPECT_EQ(p.age, 0);
+    for (int i = 0; i < out.size()-1; i++) { 
+        EXPECT_TRUE(out[i] <= out[i+1]);
+    }
 }
 
 

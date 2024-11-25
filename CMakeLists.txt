@@ -59,6 +59,15 @@ add_custom_target(create_tar ALL
 )
 add_dependencies(create_tar sorting)
 
+set(pytestingfolder "${CMAKE_CURRENT_SOURCE_DIR}/pytesting")
+# add_custom_target(makepydir ALL COMMAND ${CMAKE_COMMAND} -E make_directory ${pytestingfolder})
+add_custom_command(
+    TARGET pysort POST_BUILD
+    COMMAND ${CMAKE_COMMAND} -E copy
+    ${CMAKE_BINARY_DIR}/lib/pysort*
+    ${pytestingfolder}/pysort.so
+)
+
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

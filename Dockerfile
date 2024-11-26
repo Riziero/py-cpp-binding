@@ -25,17 +25,10 @@ RUN pip install -r requirements.txt
 # Copy in the source code
 COPY . /src
 
-# Setup an app user
 RUN useradd sort
-
-RUN mkdir -p /src
-RUN chown  sort:sort /src
+# RUN mkdir -p /src
+RUN chown -R sort:sort /src
 RUN chmod 755 /src
-
-# Allow Python to mess inside/src/pytesting 
-RUN chown  sort:sort /src/pytesting
-RUN chmod 755 /src/pytesting
-
 
 USER sort
 WORKDIR /src

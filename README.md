@@ -1,5 +1,5 @@
 This is a little project to showcase how to properly use pybind11 to generate a python module starting from a simple `cpp` project.
- It is by no means ready for production. It could be improved by having some sort of `CI` kick off the process, build and publish a wheel, package an `rpm` or `debian` and so fort.
+ It is by no means ready for production. It could be improved by having some sort of `CI` kick off the process, build and publish a wheel, package an `rpm` or `debian` and so forth.
 ### How to run it
 
 Build the docker image `pysort`

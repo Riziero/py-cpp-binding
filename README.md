@@ -10,7 +10,7 @@ then run it with
 ```
 sudo docker run -v ./out:/opt/out:Z -it pysort
 ```
-### what it does
+### What it does
 * builds and tests the cpp library `sorting.so`  
 * builds and tests the `pysort` python module  
 * archives all the libs in a `.tgz` file  

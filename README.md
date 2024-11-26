@@ -11,8 +11,8 @@ The only requirments are that you have a working installation of `git` and `Dock
 git clone https://github.com/Riziero/py-cpp-binding.git
 
 cd py-cpp-binding
-git submodule --init
-git submodule --update
+git submodule init
+git submodule update
 
 docker build . --tag pysort
 ```

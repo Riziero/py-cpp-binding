@@ -1,9 +1,6 @@
 #include <iostream>
-#include <iomanip>
 #include <algorithm>
 #include "sortArray.hpp"
-
-#include <bits/stdc++.h>
 #include <vector>
 
 
